@@ -45,8 +45,7 @@ const sendInquiry = async (req, res) => {
       website, // Honeypot field
     } = req.body;
 
-    // Honeypot spam protection
-    // Real users should leave this field empty.
+    // Honeypot: spam protection. Real users should leave this field empty.
     if (website) {
       return res.status(200).json({
         success: true,

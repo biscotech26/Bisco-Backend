@@ -1,11 +1,16 @@
 require("dotenv").config();
 
 const express = require("express");
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec = require("./config/swagger");
 const cors = require("cors");
 
 const inquiryRoutes = require("./routes/inquiryRoutes");
 
 const app = express();
+
+// Serve Swagger UI
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Allowed frontend origins
 const allowedOrigins = [
@@ -40,6 +45,26 @@ app.get("/", (req, res) => {
     message: "Biscotech API is running.",
   });
 });
+
+// Swagger JSON
+app.get("/api-docs.json", (req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  res.send(swaggerSpec);
+});
+
+// Swagger UI
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerSpec, {
+    customSiteTitle: "Biscotech API Documentation",
+    swaggerOptions: {
+      docExpansion: "none",
+      filter: true,
+      displayRequestDuration: true,
+    },
+  })
+);
 
 // Inquiry routes
 app.use("/api/inquiry", inquiryRoutes);
