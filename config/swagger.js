@@ -22,7 +22,7 @@ const options = {
                 description: 'local server',
             },
             {
-                url: process.env.PRODUCTION_URL,
+                url: process.env.BACKEND_PRODUCTION_URL,
                 description: "Production server",
             },
         ],

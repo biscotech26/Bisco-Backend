@@ -15,7 +15,9 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // Allowed frontend origins
 const allowedOrigins = [
   process.env.CLIENT_URL,
-  process.env.PRODUCTION_URL,
+  process.env.BACKEND_PRODUCTION_URL,
+  process.env.FRONTEND_URL,
+  process.env.FRONTEND_URL_2,
 ].filter(Boolean);
 
 // CORS configuration
